@@ -36,8 +36,8 @@ source ~/python/bin/activate
 # install libraries
 pip install openai telebot datetime && echo "Требуемые модули библиотек python подключены."
 
-# clone project
-git clone https://github.com/laps78/gpt && cd gpt # TODO change project repo configuration
+# change user
+logout
 
 # create env & set api tokens
 touch .env
