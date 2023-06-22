@@ -18,13 +18,13 @@ echo "***********************************************************************"
 echo "L.A.P.S. GPT TELEGRAM BOT ATOMATIC INSTALLER FOR SPRINTBOX v0.1:"
 echo "init..."
 
+# install required system packages
+sudo apt update && sudo apt upgrade -y
+sudo apt install python3-pip -y
+
 # create bot user
 echo "Будет создан пользователь gpt_bot. Вам будет предложено ввести и подтвердить UNIX пароль, а также заполнить дополнительную информацию о пользователе. Обязательно требуется точно ввести и повторить пароль, остальные данные - просто нажимайте enter";
 adduser gpt_bot && echo "Пользователь gpt_bot создан"
-
-# install packages
-sudo apt update && sudo apt upgrade -y
-sudo apt install python3-pip -y
 
 # switch to non-root user & configure user environment
 su - gpt_bot
