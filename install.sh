@@ -83,11 +83,7 @@ Restart=always
 WantedBy=multi-user.target
 EOF
 
-systemctl daemon-reload
-systemctl enable laps-gpt-bot
-systemctl start laps-gpt-bot
-
-echo "Демон настроен и активирован";
+systemctl daemon-reload && systemctl enable laps-gpt-bot && systemctl start laps-gpt-bot && echo "Демон настроен и активирован";
 
 # final commands
 echo "Установка завершена."
