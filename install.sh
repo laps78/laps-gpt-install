@@ -24,8 +24,9 @@ echo "Будет создан пользователь gpt_bot. Вам буде�
 adduser gpt_bot --debug && echo "Пользователь gpt_bot создан"
 
 # switch to non-root user & configure user environment
-# su - gpt_bot 
-runuser -l gpt_bot -c "pip3 install virtualenv" && echo "line 28 passed"
+su - gpt_bot 
+pip3 install virtualenv --user" && echo "line 28 passed"
+logout
 runuser -l gpt_bot -c "export PATH=$HOME/.local/bin:$PATH" && echo "line 29 passed"
 runuser -l gpt_bot -c "virtualenv --system-site-packages python" && echo "line 30 passed"
 runuser -l gpt_bot -c "source ~/python/bin/activate" && echo "line 31 passed"
