@@ -17,7 +17,7 @@ echo "init..."
 
 # install required system packages
 sudo apt update && sudo apt upgrade -y
-sudo apt install python3-pip -y
+sudo apt install python3-pip -y && sudo apt autoremove -y
 
 # create bot user
 echo "Будет создан пользователь gpt_bot. Вам будет предложено ввести и подтвердить UNIX пароль, а также заполнить дополнительную информацию о пользователе. Обязательно требуется точно ввести и повторить пароль, остальные данные - просто нажимайте enter";
@@ -25,11 +25,11 @@ adduser gpt_bot --debug && echo "Пользователь gpt_bot создан"
 
 # switch to non-root user & configure user environment
 # su - gpt_bot 
-runuser -l gpt_bot -c "pip3 install virtualenv --user"
-runuser -l gpt_bot -c "export PATH=$HOME/.local/bin:$PATH"
-runuser -l gpt_bot -c "virtualenv --system-site-packages python"
-runuser -l gpt_bot -c "source ~/python/bin/activate"
-runuser -l gpt_bot -c "pip install openai telebot datetime" && echo "Требуемые модули библиотек python подключены."
+runuser -l gpt_bot -c "pip3 install virtualenv --user" && echo "line 28 passed"
+runuser -l gpt_bot -c "export PATH=$HOME/.local/bin:$PATH" && echo "line 29 passed"
+runuser -l gpt_bot -c "virtualenv --system-site-packages python" && echo "line 30 passed"
+runuser -l gpt_bot -c "source ~/python/bin/activate" && echo "line 31 passed"
+runuser -l gpt_bot -c "pip install openai telebot datetime --break-system-packages" && echo "Требуемые модули библиотек python подключены."
 
 # change user
 # sudo su
