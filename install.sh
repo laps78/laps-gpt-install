@@ -81,3 +81,5 @@ systemctl daemon-reload && systemctl enable laps-gpt-bot && systemctl start laps
 echo "Установка завершена."
 echo "запрос текущего состояния бота:"
 systemctl status laps-gpt-bot
+
+# TODO разберитесь, почемо не работает системный демон!
