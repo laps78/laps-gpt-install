@@ -25,7 +25,11 @@ adduser gpt_bot --debug && echo "Пользователь gpt_bot создан"
 
 # switch to non-root user & configure user environment
 # su - gpt_bot 
-runuser -l gpt_bot -c "pip3 install virtualenv --user && export PATH=$HOME/.local/bin:$PATH && virtualenv --system-site-packages python && source ~/python/bin/activate && pip install openai telebot datetime" && echo "Требуемые модули библиотек python подключены."
+runuser -l gpt_bot -c "pip3 install virtualenv --user"
+runuser -l gpt_bot -c "export PATH=$HOME/.local/bin:$PATH"
+runuser -l gpt_bot -c "virtualenv --system-site-packages python"
+runuser -l gpt_bot -c "source ~/python/bin/activate"
+runuser -l gpt_bot -c "pip install openai telebot datetime" && echo "Требуемые модули библиотек python подключены."
 
 # change user
 # sudo su
