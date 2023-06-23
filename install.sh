@@ -68,7 +68,7 @@ After=network.target
 Type=simple
 User=gpt_bot
 WorkingDirectory=/home/gpt
-ExecStart=/usr/bin/python3 /home/gpt/gpt-bot.py
+ExecStart=python3 gpt-bot.py
 Restart=always
 
 [Install]
