@@ -68,7 +68,7 @@ After=network.target
 Type=simple
 User=gpt_bot
 WorkingDirectory=/home/gpt
-ExecStart=/usr/bin/python3 /home/gpt/gpt-bot.py
+ExecStart=python3 /home/gpt/gpt-bot.py
 Restart=always
 
 [Install]
@@ -79,3 +79,5 @@ systemctl daemon-reload && systemctl enable laps-gpt-bot && systemctl start laps
 
 # final commands
 echo "Установка завершена."
+echo "запрос текущего состояния бота:"
+systemctl status laps-gpt-bot
