@@ -27,11 +27,13 @@ adduser gpt_bot && echo "Пользователь gpt_bot создан"
 sudo apt install python3-virtualenv -y && echo "python3-virtualenv установлен"
 runuser -l gpt_bot -c "export PATH=$HOME/.local/bin:$PATH" && echo "HOME path установлено"
 runuser -l gpt_bot -c "virtualenv --system-site-packages python" && echo "virtualenv configured"
-runuser -l gpt_bot -c "source ~/python/bin/activate" && echo "line 31 passed"
-runuser -l gpt_bot -c "pip install openai telebot datetime --break-system-packages" && echo "Требуемые модули библиотек python подключены."
+#runuser -l gpt_bot -c "source ~/python/bin/activate" && echo "line 31 passed"
+runuser -l gpt_bot -c "cd ~ && source python/bin/activate && pip install openai telebot datetime" && echo "Требуемые модули библиотек python подключены."
 
-# change user
-# sudo su
+
+# additions from support tickets
+mv /root/laps-gpt-install/gpt-bot.py /home/gpt_bot/gpt-bot.py
+chown gpt_bot:gpt_bot /home/gpt_bot/gpt-bot.py
 
 # create env & set api tokens
 touch .env
@@ -67,7 +69,7 @@ After=network.target
 [Service]
 Type=simple
 User=gpt_bot
-WorkingDirectory=/home/gpt
+WorkingDirectory=/home/gpt_bot
 ExecStart=python3 gpt-bot.py
 Restart=always
 
