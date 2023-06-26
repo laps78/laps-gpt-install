@@ -36,7 +36,7 @@ mv /root/laps-gpt-install/gpt-bot.py /home/gpt_bot/gpt-bot.py
 chown gpt_bot:gpt_bot /home/gpt_bot/gpt-bot.py
 
 # create env & set api tokens
-cd home/gpt_bot/
+cd home/gpt_bot
 touch .env
 echo "                                 _____  "  
 echo "________________________________ ___(_) "
