@@ -36,6 +36,7 @@ mv /root/laps-gpt-install/gpt-bot.py /home/gpt_bot/gpt-bot.py
 chown gpt_bot:gpt_bot /home/gpt_bot/gpt-bot.py
 
 # create env & set api tokens
+cd home/gpt_bot/
 touch .env
 echo "                                 _____  "  
 echo "________________________________ ___(_) "
@@ -58,6 +59,7 @@ echo "Введите токен, полученный в Telegram от @botFathe
 read TG_TOKEN
 echo "OPENAI_TOKEN=$OPENAI_TOKEN" > .env && echo "openai токен установлен"
 echo "TG_TOKEN=$TG_TOKEN" >> .env && echo "telegram токен установен" && echo "Переменные окружения установлены."
+cd ~
 
 # install watchdog daemon systemctl service
 cat > /etc/systemd/system/laps-gpt-bot.service << EOF
