@@ -35,8 +35,8 @@ adduser gpt_bot && echo "Пользователь gpt_bot создан"
 sudo apt install python3-virtualenv -y && echo "python3-virtualenv установлен"
 runuser -l gpt_bot -c "export PATH=$HOME/.local/bin:$PATH" && echo "HOME path установлено"
 runuser -l gpt_bot -c "virtualenv --system-site-packages python" && echo "virtualenv configured"
-#runuser -l gpt_bot -c "source ~/python/bin/activate" && echo "line 31 passed"
 runuser -l gpt_bot -c "cd ~ && source python/bin/activate && pip install openai telebot datetime" && echo "Требуемые модули библиотек python подключены."
+runuser -l gpt_bot -c "cd ~ && source python/bin/activate && pip install telebot" && echo "pip-пакет Telebot доустановлен."
 
 
 # additions from support tickets
