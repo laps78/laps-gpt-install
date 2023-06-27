@@ -6,6 +6,7 @@ set -o nounset
 set -o pipefail
 
 # initial actions
+clear
 echo "Запуск скрипта установщика бота на сервер ubuntu..."
 echo "***********************************************************************"
 echo "* ______   _______   ________  ________        ______        ______   *"
@@ -24,6 +25,7 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install python3-pip -y && sudo apt autoremove -y
 
 # create bot user
+clear
 echo "============================================================"
 echo "|| СОЗДАНИЕ ПОЛЬЗОВАТЕЛЯ НА СЕРВЕРЕ      <<< L.A.P.S. Lab ||"
 echo "||--------------------------------------------------------||"
@@ -46,6 +48,7 @@ mv /root/laps-gpt-install/gpt-bot.py /home/gpt_bot/gpt-bot.py
 chown gpt_bot:gpt_bot /home/gpt_bot/gpt-bot.py
 
 # create env & set api tokens
+clear
 touch .env
 echo "============================================================"
 echo "|| ПОДКЛЮЧЕНИЕ К API OPENAI              <<< L.A.P.S. Lab ||"
@@ -60,6 +63,7 @@ echo "||********************************************************||"
 echo "|| Введите токен, полученный на сайте openai.com:         ||"
 echo "============================================================"
 read OPENAI_TOKEN
+clear
 echo ""
 echo "============================================================"
 echo "|| ПОДКЛЮЧЕНИЕ К API TELEGRAM            <<< L.A.P.S. Lab ||"
