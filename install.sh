@@ -77,7 +77,7 @@ echo "TG_TOKEN=$TG_TOKEN" >> .env && echo "telegram токен установе�
 mv /root/laps-gpt-install/.env /home/gpt_bot/.env && echo "Файл окружения перенесен в корневую папку приложения."
 chown gpt_bot:gpt_bot /home/gpt_bot/.env && echo "Права на файл окружения переданы пользователю бота."
 
-# install watchdog daemon systemctl service
+# install daemon systemctl service
 cat > /etc/systemd/system/laps-gpt-bot.service << EOF
 [Unit]
 Description=L.A.P.S. GPT Bot v1.1
