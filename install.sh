@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# safety instructions: stop script on errors
+set -o errexit
+set -o nounset
+set -o pipefail
+
+
 # initial actions
 echo "Запуск скрипта установщика бота на сервер ubuntu..."
 echo "***********************************************************************"
