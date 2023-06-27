@@ -74,7 +74,7 @@ read TG_TOKEN
 echo "OPENAI_TOKEN=$OPENAI_TOKEN" > .env && echo "openai токен установлен"
 echo "TG_TOKEN=$TG_TOKEN" >> .env && echo "telegram токен установен" && echo "Переменные окружения записаны."
 
-mv /root/laps-gpt-install/.env /home/gpt_bot/.env && echo "Файл окружения перенесен в корневую папку приложения."
+mv /root/.env /home/gpt_bot/.env && echo "Файл окружения перенесен в корневую папку приложения."
 chown gpt_bot:gpt_bot /home/gpt_bot/.env && echo "Права на файл окружения переданы пользователю бота."
 
 # install daemon systemctl service
