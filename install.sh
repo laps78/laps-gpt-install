@@ -5,7 +5,6 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-
 # initial actions
 echo "Запуск скрипта установщика бота на сервер ubuntu..."
 echo "***********************************************************************"
@@ -16,7 +15,6 @@ echo "* _  /______  ___ |___  ____/______/ /__       _  /___/ /_/ /_  /_/ / *"
 echo "* /_____/(_)_/  |_|(_)_/    _(_)____/_(_)      /_____/\__,_/ /_.___/  *"
 echo "*                                                                     *"
 echo "***********************************************************************"
-
 
 echo "L.A.P.S. GPT TELEGRAM BOT ATOMATIC INSTALLER FOR SPRINTBOX v0.1:"
 echo "init..."
@@ -41,8 +39,7 @@ adduser gpt_bot && echo "Пользователь gpt_bot создан"
 sudo apt install python3-virtualenv -y && echo "python3-virtualenv установлен"
 runuser -l gpt_bot -c "export PATH=$HOME/.local/bin:$PATH" && echo "HOME path установлено"
 runuser -l gpt_bot -c "virtualenv --system-site-packages python" && echo "virtualenv configured"
-runuser -l gpt_bot -c "cd ~ && source python/bin/activate && pip install openai pyTelegramBotAPI telebot==0.0.5 datetime" && echo "Требуемые модули библиотек python подключены."
-
+runuser -l gpt_bot -c "cd ~ && source python/bin/activate && pip install openai pyTelegramBotAPI datetime" && echo "Требуемые модули библиотек python подключены."
 
 # additions from support tickets
 mv /root/laps-gpt-install/gpt-bot.py /home/gpt_bot/gpt-bot.py
