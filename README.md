@@ -215,6 +215,13 @@ sudo chmod +x install.sh
 
 Введите api-токен бота telegram, который выдал @botFather при создании бота в Телеграм.
 
+```bash
+su gpt_bot
+cd ~
+source python/bin/activate
+pip install telebot
+```
+
 ---
 
 [инструкция по созданию телеграм-ботов на SprintBOX](https://help.sprintbox.ru/perl-python-nodejs/python-telegram-bots)
