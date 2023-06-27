@@ -35,8 +35,7 @@ adduser gpt_bot && echo "Пользователь gpt_bot создан"
 sudo apt install python3-virtualenv -y && echo "python3-virtualenv установлен"
 runuser -l gpt_bot -c "export PATH=$HOME/.local/bin:$PATH" && echo "HOME path установлено"
 runuser -l gpt_bot -c "virtualenv --system-site-packages python" && echo "virtualenv configured"
-runuser -l gpt_bot -c "cd ~ && source python/bin/activate && pip install openai pyTelegramBotAPI datetime" && echo "Требуемые модули библиотек python подключены."
-#runuser -l gpt_bot -c "cd ~ && source python/bin/activate && pip install telebot" && echo "pip-пакет Telebot доустановлен."
+runuser -l gpt_bot -c "cd ~ && source python/bin/activate && pip install openai pyTelegramBotAPI telebot==0.0.5 datetime" && echo "Требуемые модули библиотек python подключены."
 
 
 # additions from support tickets
@@ -77,12 +76,6 @@ echo "TG_TOKEN=$TG_TOKEN" >> .env && echo "telegram токен установе�
 
 mv /root/laps-gpt-install/.env /home/gpt_bot/.env && echo "Файл окружения перенесен в корневую папку приложения."
 chown gpt_bot:gpt_bot /home/gpt_bot/.env && echo "Права на файл окружения переданы пользователю бота."
-
-su gpt_bot
-cd ~
-source python/bin/activate
-pip install telebot
-exit
 
 # install watchdog daemon systemctl service
 cat > /etc/systemd/system/laps-gpt-bot.service << EOF

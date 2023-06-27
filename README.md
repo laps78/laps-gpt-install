@@ -141,22 +141,16 @@
 git clone https://github.com/laps78/laps-gpt-install
 ```
 
-2.2. Переходим в папку проекта
+2.2. Разрешаем исполнение инсталлятора (install.sh)
 
 ```bash
-cd laps-gpt-install
+sudo chmod +x laps-gpt-install/install.sh
 ```
 
-2.3. Разрешаем исполнение инсталлятора (install.sh)
+2.3. Запускаем инсталлятор (install.sh)
 
 ```bash
-sudo chmod +x install.sh
-```
-
-2.4. Запускаем инсталлятор (install.sh)
-
-```bash
-./install.sh
+./laps-gpt-install/install.sh
 ```
 
 Вы увидите начало процесса установки програмного обеспечения на удаленном сервере. Будут установлены обновления сборки серверного ПО и некоторые дополнительные пакеты, требуемые для работы приложения.
