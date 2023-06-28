@@ -1,18 +1,7 @@
-import telebot
-import openai
-import os
-import sqlite3
-from datetime import datetime, timedelta
-
 '''
 TODO: 
-1. 
-2. Fix init_env() to set invironments correctly
-  2.1. Beshure that virtual env is activated
-  2.2. Beshure than os.environ values are set properly
 3. Use os.[method_name] to config example.db rigths to RW
 '''
-
 
 def showLogoToConsole():
     print("***************************************************************************")
@@ -27,6 +16,7 @@ def showLogoToConsole():
 
 
 def init_env():
+    import os
     # init env paths & files
     app_path = os.getcwd()
     env_path = os.path.join(app_path, '.env')
@@ -50,7 +40,7 @@ def init_env():
         exec(f.read(), {'__file__': virtual_env_activator_path})
 
 
-# устанавливаем ключи API для TG и OpenAI из переменной окружения
+# устанавливаем окружение и достаем ключи API для TG и OpenAI
 try:
     init_env()
 except FileNotFoundError:
@@ -72,6 +62,12 @@ except FileNotFoundError:
     print("Приложение завершено.")
     exit()
 
+# импорт библиотек
+from datetime import datetime, timedelta
+import sqlite3
+import os
+import openai
+import telebot
 
 openai.api_key = os.environ["OPENAI_TOKEN"]
 tg_token = os.environ["TG_TOKEN"]
@@ -80,7 +76,7 @@ tg_token = os.environ["TG_TOKEN"]
 bot = telebot.TeleBot(tg_token)
 
 # создаем подключение к базе данных
-conn = sqlite3.connect("example.db", check_same_thread=False)
+conn = sqlite3.connect("context.db", check_same_thread=False)
 
 # создаем таблицу в базе данных для хранения контекста
 with conn:

@@ -94,8 +94,11 @@ After=network.target
 [Service]
 Type=simple
 User=gpt_bot
+Group=gpt_bot
 WorkingDirectory=/home/gpt_bot
 ExecStart=python3 gpt-bot.py
+OOMScoreAdjust=-100
+RestartSec=5
 Restart=always
 
 [Install]
@@ -105,6 +108,7 @@ EOF
 systemctl daemon-reload && systemctl enable laps-gpt-bot && systemctl start laps-gpt-bot && echo "Демон настроен и активирован";
 
 # final commands
+clear
 echo "Установка завершена."
 echo "запрос текущего состояния бота:"
 systemctl status laps-gpt-bot
