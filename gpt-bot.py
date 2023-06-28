@@ -11,9 +11,6 @@ TODO:
   2.1. Beshure that virtual env is activated
   2.2. Beshure than os.environ values are set properly
 3. Use os.[method_name] to config example.db rigths to RW
-
-141.8.195.70
-__45lj7JlCNQKwBRpl1__
 '''
 
 
