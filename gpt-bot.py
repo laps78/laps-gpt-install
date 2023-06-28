@@ -4,6 +4,15 @@ import os
 import sqlite3
 from datetime import datetime, timedelta
 
+'''
+TODO: 
+1. get clear in pip os docs
+2. Fix init_env() to set invironments correctly
+  2.1. Beshure that virtual env is activated
+  2.2. Beshure than os.environ values are ste properly
+3. Use os.[method_name] to config example.db rigths to RW
+'''
+
 
 def showLogoToConsole():
     print("***************************************************************************")
@@ -19,6 +28,12 @@ def showLogoToConsole():
 def init_env():
     # init env
     env_path = os.path.join(os.getcwd(), '.env')
+
+    # activate v.env as it shown hosting manual for python bots
+    activate_this = '/home/bot/python/bin/activate_this.py'
+    with open(activate_this) as f:
+        exec(f.read(), {'__file__': activate_this})
+
     # Открываем файл и читаем все переменные окружения
     with open(env_path) as env:
         for line in env:
@@ -30,7 +45,7 @@ def init_env():
 
 # устанавливаем ключи API для TG и OpenAI из переменной окружения
 try:
-    init_env()
+    __init_env()
 except FileNotFoundError:
     showLogoToConsole()
     print("===========================================================================")
