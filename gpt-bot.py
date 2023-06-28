@@ -6,10 +6,10 @@ from datetime import datetime, timedelta
 
 '''
 TODO: 
-1. get clear in pip os docs
+1. 
 2. Fix init_env() to set invironments correctly
   2.1. Beshure that virtual env is activated
-  2.2. Beshure than os.environ values are ste properly
+  2.2. Beshure than os.environ values are set properly
 3. Use os.[method_name] to config example.db rigths to RW
 
 141.8.195.70
@@ -30,13 +30,14 @@ def showLogoToConsole():
 
 
 def init_env():
-    # init env
-    env_path = os.path.join(os.getcwd(), '.env')
-
-    # activate v.env as it shown hosting manual for python bots
-    activate_this = '/home/bot/python/bin/activate_this.py'
-    with open(activate_this) as f:
-        exec(f.read(), {'__file__': activate_this})
+    # init env paths & files
+    app_path = os.getcwd()
+    env_path = os.path.join(app_path, '.env')
+    bot_user_home_path = os.path.expanduser("~")
+    virtual_env_activator_path = os.path.join(
+        bot_user_home_path, 'python/bin/activate_this.py')
+    # print("virtual_env_activator_path: ", virtual_env_activator_path)
+    # exit()
 
     # Открываем файл и читаем все переменные окружения
     with open(env_path) as env:
@@ -46,10 +47,15 @@ def init_env():
             # Устанавливаем переменную окружения
             os.environ[key] = value
 
+        # activate v.env as it shown hosting manual for python bots
+    # activate_this = '/home/bot/python/bin/activate_this.py'
+    with open(virtual_env_activator_path) as f:
+        exec(f.read(), {'__file__': virtual_env_activator_path})
+
 
 # устанавливаем ключи API для TG и OpenAI из переменной окружения
 try:
-    __init_env()
+    init_env()
 except FileNotFoundError:
     showLogoToConsole()
     print("===========================================================================")
