@@ -11,6 +11,9 @@ TODO:
   2.1. Beshure that virtual env is activated
   2.2. Beshure than os.environ values are ste properly
 3. Use os.[method_name] to config example.db rigths to RW
+
+141.8.195.70
+__45lj7JlCNQKwBRpl1__
 '''
 
 
@@ -22,6 +25,7 @@ def showLogoToConsole():
     print("*   _  /______  ___ |___  ____/______/ /__       _  /___/ /_/ /_  /_/ /   *")
     print("*  /_____/(_)_/  |_|(_)_/    _(_)____/_(_)      /_____/\__,_/ /_.___/     *")
     print("*                                                                         *")
+    print("*           laps78.github.io | prolaps.uxp.net | vk.com/l_a_p_s           *")
     print("***************************************************************************")
 
 
@@ -121,8 +125,6 @@ def drop_cache(message):
     print('clear cash: ', message.from_user.id,
           message.from_user.first_name, message.from_user.last_name)
 
-# создаем обработчик сообщений
-
 
 @bot.message_handler(func=lambda message: True)
 def echo(message):
@@ -166,6 +168,7 @@ def echo(message):
             message, f"Произошла ошибка при обработке вашего запроса: {str(error)}")
 
 
+showLogoToConsole()
 print('L.A.P.S. GPT v1.0 started.')
 # запускаем телеграм бота
 bot.polling()
