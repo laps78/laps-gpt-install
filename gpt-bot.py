@@ -1,8 +1,3 @@
-'''
-TODO: 
-3. Use os.[method_name] to config example.db rigths to RW
-'''
-
 def showLogoToConsole():
     print("***************************************************************************")
     print("*   ______   _______   ________  ________        ______        ______     *")
