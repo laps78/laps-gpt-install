@@ -86,8 +86,6 @@ CONTEXT_CACHE_INTERVAL = timedelta(minutes=10)
 context_cache = {}
 
 # создаем обработчик команд
-
-
 @bot.message_handler(commands=['start'])
 def start(message):
     bot.reply_to(message,
