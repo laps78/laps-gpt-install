@@ -219,4 +219,4 @@ sudo chmod +x laps-gpt-install/install.sh
 
 ---
 
-[инструкция по созданию телеграм-ботов на SprintBOX](https://help.sprintbox.ru/perl-python-nodejs/python-telegram-bots)
+[инструкция по созданию телеграм-ботов на SprintBOX](https://help.sprintbox.ru/c5158/perl-python-nodejs/python-telegram-bots)
