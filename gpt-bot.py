@@ -1,13 +1,13 @@
 def showLogoToConsole():
-    print("***************************************************************************")
-    print("*   ______   _______   ________  ________        ______        ______     *")
-    print("*   ___  /   ___    |  ___  __ \ __  ___/        ___  / ______ ___  /_    *")
-    print("*   __  /    __  /| |  __  /_/ / _____ \         __  /  _  __  /_  __ \   *")
-    print("*   _  /______  ___ |___  ____/______/ /__       _  /___/ /_/ /_  /_/ /   *")
-    print("*  /_____/(_)_/  |_|(_)_/    _(_)____/_(_)      /_____/\__,_/ /_.___/     *")
-    print("*                                                                         *")
-    print("*           laps78.github.io | prolaps.uxp.net | vk.com/l_a_p_s           *")
-    print("***************************************************************************")
+    print("*****************************************************************************")
+    print("*    ______   _______   ________  ________        ______        ______      *")
+    print("*    ___  /   ___    |  ___  __ \ __  ___/        ___  / ______ ___  /_     *")
+    print("*    __  /    __  /| |  __  /_/ / _____ \         __  /  _  __  /_  __ \    *")
+    print("*    _  /______  ___ |___  ____/______/ /__       _  /___/ /_/ /_  /_/ /    *")
+    print("*   /_____/(_)_/  |_|(_)_/    _(_)____/_(_)      /_____/\__,_/ /_.___/      *")
+    print("*                                                                           *")
+    print("*               laps78.github.io | prolaps.ru | vk.com/l_a_p_s              *")
+    print("*****************************************************************************")
 
 
 def init_env():
@@ -65,8 +65,8 @@ import os
 import openai
 import telebot
 
-openai.api_key = os.environ["OPENAI_TOKEN"]
 tg_token = os.environ["TG_TOKEN"]
+noOpenAItokenMessage = 'Я вижу, что OpenAI токен API, который требуется мне для прохождения авторизации в удаленном сервисе искусственного интеллекта, не установлен. К сожалению, без него я практически бесполезен =(\n\nВоспользуйтесь комадой /settoken или задайте соответствующую переменную в окружении'
 
 # создаем экземпляр телеграм бота
 bot = telebot.TeleBot(tg_token)
@@ -93,6 +93,11 @@ def start(message):
                  "Привет! Я бот, который помогает вам общаться с OpenAI API.")
     print('start: ', message.from_user.id,
           message.from_user.first_name, message.from_user.last_name)
+    if os.environ["OPENAI_TOKEN"]:
+        openai.api_key = os.environ["OPENAI_TOKEN"]
+    else:
+        bot.send_message(message.from_user.id, noOpenAItokenMessage)
+
 
 
 @bot.message_handler(commands = ['showtoken'])
@@ -100,7 +105,7 @@ def show_token(message):
     if openai.api_key:
         bot.send_message(message.from_user.id, openai.api_key)
     else:
-        bot.send_message(message.from_user.id, 'OpenAI токен API не установлен. Воспользуйтесь комадой /settoken или jghtltkbnt соответствующую переменную в окружении')
+        bot.send_message(message.from_user.id, noOpenAItokenMessage)
 
 
 @bot.message_handler(commands = ['settoken'])
@@ -123,7 +128,7 @@ def set_new_token(message):
 @bot.message_handler(commands=['help'])
 def help(message):
     bot.reply_to(message,
-                 "Вы можете отправлять запросы в OpenAI API через меня. Просто напишите мне свой запрос и я отправлю его на обработку.\n\nТакже доступные команды:\n\n/start - запуск бота\n/refresh - сбросить контекст(актуально, если получаете ошибку нехватки токенов)\n/help - вызов данной справки")
+                 "Вы можете отправлять запросы в OpenAI API через меня. Просто напишите мне свой запрос и я отправлю его на обработку.\n\nТакже доступные команды:\n\n/start - запуск бота\n/refresh - сбросить контекст(актуально, если получаете ошибку нехватки токенов)\n/settoken - установить OpenAI api токен\n/showtoken - показать активный OpenAI api токен\n/help - вызов данной справки")
     print('help: ', message.from_user.id,
           message.from_user.first_name, message.from_user.last_name)
 

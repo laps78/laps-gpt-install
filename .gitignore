@@ -1,3 +1,4 @@
 .DS_Store
 gpt-tg-bot.code-workspace
 refre.sh
+.env
