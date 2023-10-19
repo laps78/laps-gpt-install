@@ -65,7 +65,11 @@ import os
 import openai
 import telebot
 
+# устанавливаем требуемые ключи API из окружения
 tg_token = os.environ["TG_TOKEN"]
+if (os.environ["OPENAI_TOKEN"]):
+    openai.api_key = os.environ["OPENAI_TOKEN"]
+
 noOpenAItokenMessage = 'Я вижу, что OpenAI токен API, который требуется мне для прохождения авторизации в удаленном сервисе искусственного интеллекта, не установлен. К сожалению, без него я практически бесполезен =(\n\nВоспользуйтесь комадой /settoken или задайте соответствующую переменную в окружении'
 
 # создаем экземпляр телеграм бота
@@ -87,8 +91,7 @@ CONTEXT_CACHE_INTERVAL = timedelta(minutes=10)
 context_cache = {}
 
 def openAI_apikey_check(message):
-    if (os.environ["OPENAI_TOKEN"] or openai.api_key):
-        openai.api_key = os.environ["OPENAI_TOKEN"]
+    if openai.api_key:
         return True
     else:
         bot.send_message(message.from_user.id, noOpenAItokenMessage)
@@ -157,6 +160,7 @@ def drop_cache(message):
 @bot.message_handler(func=lambda message: True)
 def echo(message):
     if not openAI_apikey_check(message):
+        bot.send_message(message.from_user.id, noOpenAItokenMessage)
         return
     # смотрим, есть ли контекст в кэше
     if message.chat.id in context_cache and datetime.now() - context_cache[message.chat.id]['timestamp'] <= CONTEXT_CACHE_INTERVAL:
