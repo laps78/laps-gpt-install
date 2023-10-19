@@ -18,7 +18,7 @@ def init_env():
     bot_user_home_path = os.path.expanduser("~")
     virtual_env_activator_path = os.path.join(
         bot_user_home_path, 'python/bin/activate_this.py')
-    # print("virtual_env_activator_path: ", virtual_env_activator_path)
+    print("virtual_env_activator_path: ", virtual_env_activator_path)
     # exit()
 
     # Открываем файл и читаем все переменные окружения
@@ -86,6 +86,15 @@ CONTEXT_CACHE_INTERVAL = timedelta(minutes=10)
 # словарь, в котором будут храниться последние запросы пользователя
 context_cache = {}
 
+def openAI_apikey_check(message):
+    if (os.environ["OPENAI_TOKEN"] or openai.api.key):
+        openai.api_key = os.environ["OPENAI_TOKEN"]
+        return True
+    else:
+        bot.send_message(message.from_user.id, noOpenAItokenMessage)
+        return False
+
+
 # создаем обработчики команд
 @bot.message_handler(commands=['start'])
 def start(message):
@@ -93,11 +102,7 @@ def start(message):
                  "Привет! Я бот, который помогает вам общаться с OpenAI API.")
     print('start: ', message.from_user.id,
           message.from_user.first_name, message.from_user.last_name)
-    if os.environ["OPENAI_TOKEN"]:
-        openai.api_key = os.environ["OPENAI_TOKEN"]
-    else:
-        bot.send_message(message.from_user.id, noOpenAItokenMessage)
-
+    openAI_apikey_check(message)
 
 
 @bot.message_handler(commands = ['showtoken'])
@@ -116,7 +121,7 @@ def set_token_dialog(message):
 
 
 def set_new_token(message):
-    if len(openai.api_key) == len(message.text):
+    if len(message.text) == 51:
         openai.api_key = message.text
         bot.send_message(message.from_user.id, "OpenAI токен API успешно изменен на " + message.text)
         print('token change success: ', message.from_user.id, message.from_user.first_name, message.from_user.last_name)
@@ -151,6 +156,8 @@ def drop_cache(message):
 
 @bot.message_handler(func=lambda message: True)
 def echo(message):
+    if not openAI_apikey_check(message):
+        return
     # смотрим, есть ли контекст в кэше
     if message.chat.id in context_cache and datetime.now() - context_cache[message.chat.id]['timestamp'] <= CONTEXT_CACHE_INTERVAL:
         context = context_cache[message.chat.id]['message']
