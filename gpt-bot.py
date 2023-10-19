@@ -87,7 +87,7 @@ CONTEXT_CACHE_INTERVAL = timedelta(minutes=10)
 context_cache = {}
 
 def openAI_apikey_check(message):
-    if (os.environ["OPENAI_TOKEN"] or openai.api.key):
+    if (os.environ["OPENAI_TOKEN"] or openai.api_key):
         openai.api_key = os.environ["OPENAI_TOKEN"]
         return True
     else:
