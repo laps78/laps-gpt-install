@@ -19,7 +19,6 @@ def init_env():
     virtual_env_activator_path = os.path.join(
         bot_user_home_path, 'python/bin/activate_this.py')
     print("virtual_env_activator_path: ", virtual_env_activator_path)
-    # exit()
 
     # Открываем файл и читаем все переменные окружения
     with open(env_path) as env:
@@ -62,13 +61,13 @@ except FileNotFoundError:
 from datetime import datetime, timedelta
 import sqlite3
 import os
-import openai
+from openai import OpenAI
 import telebot
 
 # устанавливаем требуемые ключи API из окружения
 tg_token = os.environ["TG_TOKEN"]
 if (os.environ["OPENAI_TOKEN"]):
-    openai.api_key = os.environ["OPENAI_TOKEN"]
+    client = OpenAI(api_key = os.environ["OPENAI_TOKEN"])
 
 noOpenAItokenMessage = 'Я вижу, что OpenAI токен API, который требуется мне для прохождения авторизации в удаленном сервисе искусственного интеллекта, не установлен. К сожалению, без него я практически бесполезен =(\n\nВоспользуйтесь комадой /settoken или задайте соответствующую переменную в окружении'
 
@@ -90,8 +89,9 @@ CONTEXT_CACHE_INTERVAL = timedelta(minutes=10)
 # словарь, в котором будут храниться последние запросы пользователя
 context_cache = {}
 
+# функция проверки наличия установленного api_key OpenAI
 def openAI_apikey_check(message):
-    if openai.api_key:
+    if client.api_key:
         return True
     else:
         bot.send_message(message.from_user.id, noOpenAItokenMessage)
@@ -110,8 +110,8 @@ def start(message):
 
 @bot.message_handler(commands = ['showtoken'])
 def show_token(message):
-    if openai.api_key:
-        bot.send_message(message.from_user.id, openai.api_key)
+    if client.api_key:
+        bot.send_message(message.from_user.id, client.api_key)
     else:
         bot.send_message(message.from_user.id, noOpenAItokenMessage)
 
@@ -125,7 +125,7 @@ def set_token_dialog(message):
 
 def set_new_token(message):
     if len(message.text) == 51:
-        openai.api_key = message.text
+        client.api_key = message.text
         bot.send_message(message.from_user.id, "OpenAI токен API успешно изменен на " + message.text)
         print('token change success: ', message.from_user.id, message.from_user.first_name, message.from_user.last_name)
     else:
@@ -178,13 +178,17 @@ def echo(message):
     print('bot accepted request from: ', message.from_user.id,
           message.from_user.first_name, message.from_user.last_name)
     try:
-        response = openai.Completion.create(
-            engine="text-davinci-003",
-            prompt=context + message.text,
-            temperature=0.5,
-            max_tokens=3500
+        completion = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {
+                    "role": "user",
+                    "content": context + message.text,
+                 }
+            ]
         )
-        bot.reply_to(message, response.choices[0].text)
+        answer = completion.choices[0].message.content
+        bot.reply_to(message, answer)
         print('bot replies to: ', message.from_user.id,
               message.from_user.first_name, message.from_user.last_name)
 
